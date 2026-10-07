@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Locais e Eventos de Suzano</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  /* MÍDIA: toda imagem e vídeo nunca passa da largura da caixa e mantém a proporção. */
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* USUÁRIO (foco): contorno visível quando se navega pelo teclado (Tab). */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid #1c7fa6;
+    outline-offset: 2px;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+    line-height: 1.6;
+    background-color: #e9edf0;
+    min-height: 100vh;
+    /* Base (celular): uma coluna, tudo empilhado */
+    display: grid;
+    grid-template-areas:
+      "topo"
+      "lado"
+      "conteudo"
+      "rodape";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+  }
+
+  /* Etapa 0 — Cabeçalho e menu global */
+  header {
+    grid-area: topo;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 30px;
+    background-color: #1c8fc0;
+    color: #ffffff;
+  }
+
+  header .identidade h1 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  header .identidade p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #e3f2fa;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 26px;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a:link,
+  nav a:visited {
+    /* USUÁRIO (toque): área mínima de 44px para clicar com o dedo. */
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 4px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  nav a.ativo {
+    border-bottom: 3px solid #f4c542;
+    font-weight: bold;
+  }
+
+  nav a:hover,
+  nav a:focus {
+    text-decoration: underline;
+  }
+
+  nav a:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    grid-area: conteudo;
+  }
+   .lateral {
+    grid-area:lado;
+    background-color: #ffffff;
+    border-bottom: 1px solid #d5dbe0;
+    padding: 20px 16px;
+  }
+ 
+  .lateral h2 {
+    margin: 0 0 12px;
+    font-size: 0.95rem;
+    color: #1c7fa6;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+ 
+  .lateral ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+ 
+  .lateral a:link,
+  .lateral a:visited {
+    /* USUÁRIO (toque): área mínima de 44px. */
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 6px;
+    color: #333333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-radius: 4px;
+  }
+ 
+  .lateral a:hover,
+  .lateral a:focus {
+    background-color: #eef1f4;
+    color: #1c7fa6;
+  }
+ 
+  .lateral a:focus-visible {
+    outline: 2px solid #1c7fa6;
+    outline-offset: 2px;
+  }
+
+  /* Etapa 1 — Destaque */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 45vh;
+    text-align: center;
+    padding: 20px;
+    background-color: #eef1f4;
+  }
+
+  .hero h2 {
+    margin: 0 0 10px;
+    /* TIPOGRAFIA: título que cresce e encolhe com a tela.
+       clamp(mínimo, preferido, máximo)
+       Em 360px de tela vale 28px; em 1280px de tela vale 48px.*/
+    font-size: clamp(1.75rem, 1.261rem + 2.174vw, 3rem);
+    line-height: 1.2;
+    max-width: 26ch;          /* limita a linha e o título quebra de forma equilibrada */
+    margin-inline: auto;
+    text-wrap: balance;
+    overflow-wrap: anywhere;  /* palavra longa não estoura a tela */
+    color: #222222;
+  }
+
+  .hero p {
+    margin: 0;
+    color: #1c7fa6;
+    font-size: 1rem;
+  }
+
+  /* Etapa 2 — Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 20px;
+    padding: 30px 24px;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border: 1px solid #d5dbe0;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+  }
+
+  .card h3 {
+    margin: 0 0 8px;
+    color: #1c7fa6;
+  }
+
+  .card p {
+    margin: 0 0 10px;
+    color: #555555;
+  }
+
+  .card a:link,
+  .card a:visited {
+    color: #1c7fa6;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .card a:hover,
+  .card a:focus {
+    text-decoration: underline;
+  }
+
+  /* MÍDIA: caixa 16:9 com object-fit: cover, a foto preenche sem distorcer. */
+  .card > a:not(.card-link) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+  }
+
+  /* Card-link: o conteúdo inteiro do card é um <a> */
+  a.card-link:link,
+  a.card-link:visited {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a.card-link:hover .ver,
+  a.card-link:focus-visible .ver {
+    text-decoration: underline;
+  }
+
+  .card .ver {
+    color: #1c7fa6;
+    font-size: 0.9rem;
+  }
+
+  .card figure {
+    margin: 0 0 12px;
+  }
+
+  .card img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* USUÁRIO (toque): o link "Ver detalhes" agora tem 44px de altura. */
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  /* Etapa 3 — Rodapé sempre no fim */
+  footer {
+    grid-area: rodape;
+    text-align: center;
+    padding: 20px 16px;
+    background-color: #20242b;
+    color: #ffffff;
+    font-size: 0.85rem;
+  }
+
+  /* Breakpoint (medido): a partir de 33em (528px) cabe barra lateral
+     (200px) + 1 card de 280px + padding de 48px */
+  @media (min-width: 33em) {
+    body {
+      grid-template-areas:
+        "topo topo"
+        "lado conteudo"
+        "rodape rodape";
+      grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .lateral {
+      border-bottom: 0;
+      border-right: 1px solid #d5dbe0;
+    }
+
+    .lateral ul {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 4px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="identidade">
+    <h1>Guia de Locais</h1>
+    <p>Suzano</p>
+  </div>
+  <nav aria-label="Menu principal">
+    <ul>
+      <li><a href="index.html" class="ativo">Início</a></li>
+      <li><a href="#locais">Locais</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+<aside class="lateral">
+  <nav aria-label="Categorias">
+    <h2>Explorar</h2>
+    <ul>
+      <li><a href="#locais">Parques</a></li>
+      <li><a href="#locais">Museus</a></li>
+      <li><a href="#eventos">Teatros</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+    </ul>
+  </nav>
+</aside>
+<main>
+
+  <section class="hero">
+    <h2>Descubra sua cidade</h2>
+    <p>Locais, eventos e programação cultural em um só lugar.</p>
+  </section>
+
+  <section class="cards" id="locais">
+    <article class="card">
+      <a class="card-link" href="pagina_parque-max-feffer.html">
+      <figure>
+      <img src="https://images.trvl-media.com/place/6233925/d00c11b2-aad9-45fa-932b-ad19cfe1f176.jpg?impolicy=fcrop&w=1200&h=500&q=medium"
+           alt="Vista aérea do Parque Max Feffer em Suzano, mostrando área verde, pista de skate e estrutura de lazer urbano" 
+           width="260" height="160">
+      <figcaption>Parque Max Feffer — entrada principal</figcaption>
+    </figure>
+      <h3>Parque Max Feffer</h3>
+      <p>Área verde, pista de caminhada e eventos gratuitos.</p>
+      <span class="ver">Ver a página do local</span>
+      </a>
+    </article>
+    <article class="card">
+      <h3>Museu Municipal</h3>
+      <p>Acervo histórico e exposições temporárias.</p>
+      <a href="#">Ver detalhes</a>
+    </article>
+    <article class="card" id="eventos">
+      <h3>Teatro Vasconcelos</h3>
+      <p>Espetáculos de teatro, música e dança.</p>
+      <a href="#">Ver detalhes</a>
+    </article>
+  </section>
+
+</main>
+
+<footer id="contato">
+  <p>Guia de Locais e Eventos — Suzano</p>
+</footer>
+
+</body>
+</html>
